@@ -2,7 +2,7 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-
+name: $(Build.DefinitionName)_$(Year:yyyy)$(Month)$(Day)_$(Build.BuildId)
 trigger:
 - main
 
@@ -39,7 +39,7 @@ steps:
     projects: '**/*.csproj'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
     ArtifactName: 'sampletestartifacts'
     publishLocation: 'Container'
 

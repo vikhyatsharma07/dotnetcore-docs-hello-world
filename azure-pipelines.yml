@@ -13,7 +13,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '7.x.x'
+    version: '2.x.x'
   displayName: Use Dotnet
 - task: DotNetCoreCLI@2
   inputs:

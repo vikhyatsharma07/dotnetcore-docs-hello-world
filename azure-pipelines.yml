@@ -2,7 +2,7 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
-name: $(Build.BuildId)$(Build.SourceVersion)_$(Date)$(Month)$(Year)
+name: $(Build.SourceVersion)_$(Day)$(Month)$(Year:yyyy)
 trigger:
 - main
 

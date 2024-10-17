@@ -11,10 +11,11 @@ pool:
 
 steps:
 - task: UseDotNet@2
+  displayName: Use Dotnet
   inputs:
     packageType: 'sdk'
-    version: '2.x.x'
-  displayName: Use Dotnet
+    version: '8.x.x'
+    
 - task: DotNetCoreCLI@2
   inputs:
     azureSubscription: 'DEV_Connection'

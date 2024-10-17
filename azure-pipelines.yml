@@ -1,0 +1,45 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '7.x.x'
+  displayName: Use Dotnet
+- task: DotNetCoreCLI@2
+  inputs:
+    azureSubscription: 'DEV_Connection'
+    command: 'restore'
+    projects: '**/*.csproj'
+    vstsFeed: 'ef5ec988-3f8d-4899-9c99-1a340c2b6c25'
+    includeNuGetOrg: false
+- task: DotNetCoreCLI@2
+  displayName: Dotnet Build
+  inputs:
+    azureSubscription: 'DEV_Connection'
+    command: 'build'
+    projects: '**/*.csproj'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+- task: DotNetCoreCLI@2
+  displayName: Dotnet test
+  inputs:
+    azureSubscription: 'DEV_Connection'
+    command: 'test'
+    projects: '**/*.csproj'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'sampletestartifacts'
+    publishLocation: 'Container'
+
+
